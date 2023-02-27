@@ -47,7 +47,7 @@ namespace Массивы.Компьютерный_практикум___3
 
             int[] array2 = new int[] { 4, 7, 2, 9, 10, 13, 11, 5};
             int indexMax = 0;   int maxChange = 0;
-            int indexMin = 0;   int minChange = 0;
+            int indexMin2 = 0;   int minChange = 0;
 
             for (int i = 0; i < array2.Length; i++)
             {
@@ -60,16 +60,16 @@ namespace Массивы.Компьютерный_практикум___3
                 }
                 if (array2[i] == array2.Min())
                 {
-                    indexMin = i;
+                    indexMin2 = i;
                     minChange = array2[i];
                 }
             }
 
             Console.WriteLine($"\nMax: {array2[indexMax]}\tIndex: {indexMax}");
-            Console.WriteLine($"Min: {array2[indexMin]}\tIndex: {indexMin}");
+            Console.WriteLine($"Min: {array2[indexMin2]}\tIndex: {indexMin2}");
 
             array2[indexMax] = minChange;
-            array2[indexMin] = maxChange;
+            array2[indexMin2] = maxChange;
 
             for (int i = 0; i < array2.Length; i++)
             {
@@ -79,54 +79,63 @@ namespace Массивы.Компьютерный_практикум___3
                 }
                 if (array2[i] == array2.Min())
                 {
-                    indexMin = i;
+                    indexMin2 = i;
                 }
             }
 
             Console.WriteLine($"\nMax: {array2[indexMax]}\tIndex: {indexMax}");
-            Console.WriteLine($"Min: {array2[indexMin]}\tIndex: {indexMin}");
+            Console.WriteLine($"Min: {array2[indexMin2]}\tIndex: {indexMin2}");
 
             //Count Max and Min
             Head("Count Max and Min");
 
-            int[] array3 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int[] array3 = new int[] { 4, 6, 7, 8, 9, 4, 6, 8, 9 };
             int count = 0;
 
-            for (int i = 0; i < array3.Length; i++)
-            {
-                Console.Write(array3[i] + " ");
+            int indexMin3, indexMax2;
+            indexMin3 = Array.IndexOf(array3, array3.Min());
+            indexMax2 = Array.IndexOf(array3, array3.Max());
 
-                if (array3[i] > array3.Min() && array3[i] < array3.Max())
-                {
-                    count++;
-                }
+            if (indexMin3 > indexMax2)
+            {
+                indexMin3 = Array.IndexOf(array3, array3.Max());
+                indexMax2 = Array.IndexOf(array3, array3.Min());
+            }
+
+            foreach (var item in array3)
+            {
+                Console.Write(item + " ");
+            }
+
+            for (var b = indexMin3; b <= indexMax2; b++)
+            {
+                count++;
             }
 
             Console.WriteLine($"\nCount: {count}");
 
-            //TEST
-            int[] TestArray1 = new int[] { 1, 5, 6, 7, 2 };
+            //Add Abs to Each Item
+            Head("Add Abs to Each Item");
 
-            int[] TestArray2 = new int[TestArray1.Length];
+            int[] array4 = new int[10];
 
-            string path = @"C:\Users\Студент\Desktop\TestFile.txt";
+            Console.Write("Items in Array4 before addition: ");
 
-            using (StreamWriter sw = new StreamWriter(path, false))
+            for (int i = 0; i < array4.Length; i++)
             {
-                for (int i = 0; i < TestArray1.Length; i++)
-                {
-                    sw.WriteLine(TestArray1[i]);
-                }
+                array4[i] = random.Next(0, 10);
+                Console.Write(array4[i] + " ");
             }
 
-            using (StreamReader sr = new StreamReader(path))
-            {
-                for (int i = 0; i < TestArray2.Length; i++)
-                {
-                    TestArray2[i] = int.Parse(Console.ReadLine());
-                }
-            }
+            int MaxPlusMin = array4.Max() + array4.Min();
 
+            Console.Write("\nItems in Array4 after addition: ");
+
+            for (int i = 0; i < array4.Length; i++)
+            {
+                array4[i] += MaxPlusMin;
+                Console.Write(array4[i] + " ");
+            }
 
             Console.ReadKey();
         }
